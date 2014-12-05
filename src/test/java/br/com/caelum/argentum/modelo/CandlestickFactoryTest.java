@@ -2,6 +2,7 @@ package br.com.caelum.argentum.modelo;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -36,10 +37,16 @@ public class CandlestickFactoryTest {
 	@Test
 	public void semNegociacoesGeraCandleComZeros() {
 		Calendar hoje = Calendar.getInstance();
-		List<Negociacao> negociacoes = Arrays.asList();
+		List<Negociacao> negociacoes = new ArrayList<Negociacao>();
+		
 		CandlestickFactory fabrica = new CandlestickFactory();
 		Candlestick candle = fabrica.constroiCandleParaData(hoje, negociacoes);
+		
 		assertEquals(0.0, candle.getVolume(), 0.00001);
+		assertEquals(0.0, candle.getAbertura(), 0.00001);
+		assertEquals(0.0, candle.getFechamento(), 0.00001);
+		assertEquals(0.0, candle.getMinimo(), 0.00001);
+		assertEquals(0.0, candle.getMaximo(), 0.00001);
 	}
 	
 	@Test
@@ -58,5 +65,16 @@ public class CandlestickFactoryTest {
 	assertEquals(40.5, candle.getMinimo(), 0.00001);
 	assertEquals(40.5, candle.getMaximo(), 0.00001);
 	assertEquals(4050.0, candle.getVolume(), 0.00001);
+	}
+	
+	@Test
+	public void negociacoesEmOrdemCrescenteDeValor() {
+
+		// TODO
+	}
+	
+	@Test
+	public void negociacoesEmOrdemDecrescenteDeValor() {
+		// TODO
 	}
 }

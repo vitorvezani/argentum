@@ -3,12 +3,12 @@ package br.com.caelum.argentum.modelo;
 import java.util.GregorianCalendar;
 
 public class CandleBuilder {
-	private double abertura;
-	private double fechamento;
-	private double minimo;
-	private double maximo;
-	private double volume;
-	private GregorianCalendar data;
+	private double abertura = Double.MAX_VALUE;
+	private double fechamento = Double.MAX_VALUE;
+	private double minimo = Double.MAX_VALUE;
+	private double maximo = Double.MAX_VALUE;
+	private double volume = Double.MAX_VALUE;
+	private GregorianCalendar data = null;
 
 	public CandleBuilder comAbertura(double abertura) {
 		this.abertura = abertura;
@@ -41,6 +41,12 @@ public class CandleBuilder {
 	}
 
 	public Candlestick geraCandle() {
+
+		if (abertura == Double.MAX_VALUE || fechamento == Double.MAX_VALUE || minimo == Double.MAX_VALUE || maximo == Double.MAX_VALUE
+				|| volume == Double.MAX_VALUE || data == null)
+			throw new IllegalStateException(
+					"é necessário preencher todos os valores");
+
 		return new Candlestick(abertura, fechamento, minimo, maximo, volume,
 				data);
 	}
