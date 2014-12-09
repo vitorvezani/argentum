@@ -16,7 +16,7 @@ public final class Candlestick {
 			double maximo, double volume, Calendar data) {
 		
 		if (minimo > maximo)
-			throw new IllegalArgumentException("o valor minimo não pode ser maior que o maximo");
+			throw new IllegalArgumentException(String.format("o valor minimo(%f) não pode ser maior que o maximo(%f)", minimo, maximo));
 		
 		if (data == null)
 			throw new IllegalArgumentException("data nao pode ser nula");

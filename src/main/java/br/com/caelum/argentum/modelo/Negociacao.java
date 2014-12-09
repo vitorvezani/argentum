@@ -1,5 +1,6 @@
 package br.com.caelum.argentum.modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public final class Negociacao {
@@ -9,10 +10,10 @@ public final class Negociacao {
 	private final Calendar data;
 
 	public Negociacao(double preco, int quantidade, Calendar data) {
-		
+
 		if (data == null)
 			throw new IllegalArgumentException("data nao pode ser nula");
-		
+
 		this.preco = preco;
 		this.quantidade = quantidade;
 		this.data = data;
@@ -34,4 +35,18 @@ public final class Negociacao {
 		return preco * quantidade;
 	}
 
+	public boolean isMesmoDia(Calendar mesmoMomento) {
+		return this.data.get(Calendar.DAY_OF_MONTH) == mesmoMomento.get(Calendar.DAY_OF_MONTH)
+				&& this.data.get(Calendar.MONTH) == mesmoMomento.get(Calendar.MONTH)
+				&& this.data.get(Calendar.YEAR) == mesmoMomento.get(Calendar.YEAR);
+	}
+	
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String string = String
+				.format("[Preço %.2f, Quantidade %d, Data ",
+						this.preco, this.quantidade);
+		return string + sdf.format(this.data.getTime()) + "]";
+	}
 }
